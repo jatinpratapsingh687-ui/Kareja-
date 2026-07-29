@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Girlfriend's Day, Kareja ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #2b1d24;
+            --card-bg: #fff5f7;
+            --accent-pink: #d85a7d;
+            --deep-red: #8b263e;
+            --text-dark: #3d2c33;
+            --soft-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: linear-gradient(135deg, #fff0f3 0%, #ffe3e8 100%);
+            border-radius: 24px;
+            box-shadow: var(--soft-shadow);
+            border: 4px solid #f8b1c1;
+            overflow: hidden;
+            position: relative;
+            min-height: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Floating Cherries / Hearts Decor */
+        .decor-top, .decor-bottom {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            font-size: 20px;
+        }
+
+        /* Screen Management */
+        .screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            flex: 1;
+            animation: fadeIn 0.6s ease-in-out forwards;
+            overflow-y: auto;
+            max-height: 75vh;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* WELCOME SCREEN */
+        .welcome-content {
+            text-align: center;
+            margin: auto 0;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--deep-red);
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        .envelope-box {
+            position: relative;
+            width: 280px;
+            height: 180px;
+            background: #e06d88;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(139, 38, 62, 0.2);
+            transition: transform 0.3s ease;
+            margin: 0 auto 20px auto;
+        }
+
+        .envelope-box:hover {
+            transform: scale(1.03);
+        }
+
+        .envelope-flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 140px solid transparent;
+            border-right: 140px solid transparent;
+            border-top: 100px solid #c5536f;
+            transform-origin: top;
+            transition: transform 0.5s ease;
+        }
+
+        .envelope-box.open .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .seal-badge {
+            width: 45px;
+            height: 45px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--deep-red);
+            font-weight: bold;
+            font-size: 1.2rem;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .tap-text {
+            font-size: 0.95rem;
+            color: var(--deep-red);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 15px;
+        }
+
+        /* LETTER SCREEN */
+        .letter-card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .letter-header {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .letter-body {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .letter-footer {
+            text-align: right;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--deep-red);
+            font-weight: bold;
+        }
+
+        /* MEMORIES / GRID SCREEN */
+        .grid-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--deep-red);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .polaroid-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .polaroid {
+            background: white;
+            padding: 8px 8px 25px 8px;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            transform: rotate(-1deg);
+            transition: transform 0.3s;
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        .polaroid span {
+            display: block;
+            font-size: 0.75rem;
+            font-family: 'Playfair Display', serif;
+            margin-top: 6px;
+            color: var(--deep-red);
+        }
+
+        /* REASONS SECTION */
+        .reasons-box {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .reasons-box h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--deep-red);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .reasons-box ul {
+            list-style: none;
+        }
+
+        .reasons-box li {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* NAVIGATION BUTTONS */
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: auto;
+            padding: 10px 0;
+        }
+
+        .btn {
+            background-color: var(--deep-red);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(139, 38, 62, 0.3);
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #721d31;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--deep-red);
+            border: 1px solid var(--deep-red);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(139, 38, 62, 0.05);
+        }
+
+        .brand-footer {
+            text-align: center;
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Top Decor -->
+        <div class="decor-top">
+            <span>🍒</span>
+            <span>🍒</span>
+        </div>
+
+        <!-- SCREEN 1: WELCOME -->
+        <div id="screen-1" class="screen active">
+            <div class="welcome-content">
+                <h1>Happy Girlfriend's Day,<br>Meri Kareja ❤️</h1>
+                <div class="envelope-box" onclick="nextScreen()">
+                    <div class="envelope-flap"></div>
+                    <div class="seal-badge">T</div>
+                </div>
+                <div class="tap-text">tap to open</div>
+            </div>
+        </div>
+
+        <!-- SCREEN 2: THE LETTER -->
+        <div id="screen-2" class="screen">
+            <div class="letter-card">
+                <div class="letter-header">welcome, love<br><small>a little something, just for you</small></div>
+                <div class="letter-body">
+                    Dear Tripti,<br><br>
+                    I know aapko mai bohot kam kehta hu, par aaj aapko properly kehne do: aap ho, hands down, the best part of my life.<br><br>
+                    Aap ordinary days ko bhi kuch special bana deti ho. Aapki hasi meri favorite sound hai, aapke hugs mera safe place hai, aur aapka heart honestly sabse soft aur kindest hai jo mai janta hu.<br><br>
+                    Thank you for choosing me, baar baar, aur jab days easy na ho tab bhi. Happy Girlfriend's Day, meri kareja. Aap meri ho, aur hamesha rahogi!
+                </div>
+                <div class="letter-footer">— yours forever</div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="prevScreen()">Back</button>
+                <button class="btn" onclick="nextScreen()">Next</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 3: MEMORIES & REASONS -->
+        <div id="screen-3" class="screen">
+            <h2 class="grid-title">Every little moment, with you</h2>
+            
+            <div class="polaroid-grid">
+                <div class="polaroid">
+                    <img src="1000023341.jpg" alt="Tripti">
+                    <span>My Favorite Person</span>
+                </div>
+                <div class="polaroid">
+                    <img src="1000023335.jpg" alt="Birthday Celebration">
+                    <span>My Happiness</span>
+                </div>
+                <div class="polaroid">
+                    <img src="1000023337.jpg" alt="Beautiful Moment">
+                    <span>You & Me</span>
+                </div>
+                <div class="polaroid">
+                    <img src="1000023340.jpg" alt="Cute Selfie">
+                    <span>My World</span>
+                </div>
+            </div>
+
+            <div class="reasons-box">
+                <h3>Reasons Why I Love You</h3>
+                <ul>
+                    <li>❤️ You understand me like no one else</li>
+                    <li>❤️ Aap mujhe smile karate ho everyday</li>
+                    <li>❤️ You're my peace in the chaos</li>
+                    <li>❤️ You're my today & all my tomorrows</li>
+                </ul>
+            </div>
+
+            <div class="letter-card" style="text-align: center; font-style: italic; font-family: 'Playfair Display', serif; font-size: 0.95rem;">
+                "Aap sirf meri girlfriend nahi ho — aap meri best friend ho, mera safe place ho, aur meri greatest blessing ho."
+            </div>
+
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="prevScreen()">Back</button>
+                <button class="btn" onclick="nextScreen()">Finish</button>
+            </div>
+        </div>
+
+        <!-- SCREEN 4: FINAL SURPRISE -->
+        <div id="screen-4" class="screen">
+            <div class="welcome-content" style="margin: auto 0; text-align: center;">
+                <h1 style="font-size: 1.8rem; margin-bottom: 15px;">1 August 💖</h1>
+                <div style="width: 180px; height: 180px; border-radius: 50%; overflow: hidden; margin: 0 auto 20px auto; border: 4px solid var(--deep-red); box-shadow: var(--soft-shadow);">
+                    <img src="1000023338.jpg" alt="Tripti" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p style="font-family: 'Playfair Display', serif; font-size: 1.1rem; line-height: 1.6; color: var(--text-dark); margin-bottom: 20px;">
+                    "Every moment with you is my favorite.<br>I Love You so much, meri kareja!"
+                </p>
+                <button class="btn" onclick="resetApp()" style="margin-top: 10px;">Play Again 💌</button>
+            </div>
+        </div>
+
+        <!-- Bottom Decor -->
+        <div class="decor-bottom">
+            <span>🍒</span>
+            <div class="brand-footer" style="padding-bottom: 0;">Happy Girlfriend's Day</div>
+            <span>🍒</span>
+        </div>
+    </div>
+
+    <script>
+        let currentScreen = 1;
+        const totalScreens = 4;
+
+        function showScreen(screenNum) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(`screen-${screenNum}`).classList.add('active');
+            currentScreen = screenNum;
+        }
+
+        function nextScreen() {
+            if (currentScreen < totalScreens) {
+                showScreen(currentScreen + 1);
+            }
+        }
+
+        function prevScreen() {
+            if (currentScreen > 1) {
+                showScreen(currentScreen - 1);
+            }
+        }
+
+        function resetApp() {
+            showScreen(1);
+        }
+    </script>
+</body>
+</html>
